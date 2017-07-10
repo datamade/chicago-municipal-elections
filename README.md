@@ -19,4 +19,4 @@ Collection of precinct maps and election results for Chicago elections.
 - [x] [2010](precincts/2010_precincts.geojson)
 - [ ] 2008
 
-## [FOIAed PDF maps of 2000 - 2011](foiaed_pdfs)
+## [FOIAed PDF maps: 2000 - 2011](foia_pdfs)
