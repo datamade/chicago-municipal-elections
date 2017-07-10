@@ -6,8 +6,8 @@ Collection of precinct maps and election results for Chicago elections.
 ## Electronic maps
 
 ### Municipal Elections
-- [x] [2015](2015_precincts.geojson)
-- [x] [2011](2011_precincts.geojson)
+- [x] [2015](precincts/2015_precincts.geojson)
+- [x] [2011](precincts/2011_precincts.geojson)
 - [ ] 2007
 - [ ] 2003
 - [ ] 2001
