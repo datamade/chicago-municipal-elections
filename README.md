@@ -1,16 +1,22 @@
 # chicago-municipal-elections
 Chicago Municipal Elections
 
-Collection of precinct maps and election results for Chicago municipal
-elections.
+Collection of precinct maps and election results for Chicago elections.
 
 ## Electronic maps
-- [ ] 2016
-- [x] 2015
-- [ ] 2012
-- [x] 2011
-- [x] 2010
-- [ ] 2008
-- [ ] 2007
 
-## FOIAed PDF maps of 2000 - 2011
+### Municipal Elections
+- [x] [2015](2015_precincts.geojson)
+- [x] [2011](2011_precincts.geojson)
+- [ ] 2007
+- [ ] 2003
+- [ ] 2001
+
+### Other Elections
+- [ ] 2016
+- [ ] 2014
+- [ ] 2012
+- [x] [2010](precincts/2010_precincts.geojson)
+- [ ] 2008
+
+## [FOIAed PDF maps of 2000 - 2011](foiaed_pdfs)
