@@ -10,7 +10,7 @@ Collection of precinct maps and election results for Chicago elections.
 - [x] [2011](precincts/2011_precincts.geojson)
 - [ ] 2007
 - [ ] 2003
-- [ ] 2001
+- [ ] 1999
 
 ### Other Elections
 - [ ] 2016
