@@ -38,8 +38,11 @@ for name, race in muni_election.races.items():
             else:
                 election_results[precinct] = votes
             all_candidates.update(votes.keys())
-    #for precinct, votes in muni_election.turnout.precincts.items():
-    #    election_results[precinct].update(votes)
+    for precinct, votes in muni_election.turnout.precincts.items():
+        if precinct in election_results:
+            election_results[precinct].update(votes)
+        else:
+            election_results[precinct] = votes
 
 for precinct, votes in election_results.items():
     other_candidates = all_candidates - votes.keys()
