@@ -1,0 +1,2 @@
+https://github.com/datamade/python-chicago-elections/zipball/master
+scrapelib
