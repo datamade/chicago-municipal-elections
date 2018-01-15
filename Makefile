@@ -39,6 +39,13 @@ precincts/2003_precincts.geojson : PRECINCTS_07232004.shp
 precincts/2004_precincts.geojson : PRECINCTS_pre2006.shp
 	ogr2ogr -f GeoJSON -t_srs crs:84 $@ $<
 
+.INTERMEDIATE : chicago_2008.geojson
+chicago_2008.geojson : archive/IL_final.shp
+	ogr2ogr -f GeoJSON -where "Name like 'Wd%Pct%'" $@ $<
+
+precincts/2008_precincts.geojson : chicago_2008.geojson
+	cat $< | python scripts/parse_precinct.py > $@
+
 precincts/2010_precincts.geojson : Precincts2010.shp
 	ogr2ogr -f GeoJSON -t_srs crs:84 $@ $<
 
