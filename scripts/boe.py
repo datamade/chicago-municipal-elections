@@ -1,14 +1,27 @@
 import json
+import sys
+import argparse
+import logging
 
 from chi_elections.precincts import elections
 import scrapelib
 from scrapelib.cache import FileCache
 
-with open('../precincts/2015_precincts.geojson') as f:
-    precincts_2015 = json.load(f)
+
+logging.basicConfig(level=logging.DEBUG)
+
+parser = argparse.ArgumentParser(description='Chicago municipal election results')
+parser.add_argument('--year', type=int, help='year of election')
+parser.add_argument('--type', type=str, choices=('general', 'runoff'), help='type of election')
+parser.add_argument('geojson', type=argparse.FileType('r'), help='geojson of precincts')
+
+
+args = parser.parse_args()
+
+precincts = json.load(args.geojson)
 
 precinct_features = {}
-for feature in precincts_2015['features']:
+for feature in precincts['features']:
     properties = feature['properties']
     precinct = (properties['WARD'], properties['PRECINCT'])
     precinct_features[precinct] = properties
@@ -20,18 +33,16 @@ session.cache_storage = cache
 session.cache_write_only = False
 
 elections = elections(session)
-print(elections.keys())
 muni_election, = [election for name, election in
                   elections.items()
                   if ('municipal' in name.lower()
-                      and '2015' in name
-                      and 'general' in name.lower())]
+                      and str(args.year) in name
+                      and args.type in name.lower())]
 
 election_results = {}
 all_candidates = set()
 for name, race in muni_election.races.items():
     if 'alderman' in name.lower() or 'mayor' in name.lower():
-        print(name)
         for precinct, votes in race.precincts.items():
             if precinct in election_results:
                 election_results[precinct].update(votes)
@@ -49,6 +60,6 @@ for precinct, votes in election_results.items():
     precinct_features[precinct].update(votes)
     precinct_features[precinct].update({cand: None for cand in other_candidates})
 
-with open('out.geojson', 'w') as f:
-    json.dump(precincts_2015, f)
+with sys.stdout as f:
+    json.dump(precincts, f)
 
