@@ -43,6 +43,10 @@ precincts/2004_precincts.geojson : PRECINCTS_pre2006.shp
 chicago_2008.geojson : archive/IL_final.shp
 	ogr2ogr -f GeoJSON -where "Name like 'Wd%Pct%'" $@ $<
 
+# I manually edit the 2008 map to get a 2007 map, using the FOIAed pdfs
+# of the historic precincts
+precincts/2007_precincts.geojson : precincts/2008_precincts.geojson
+
 precincts/2008_precincts.geojson : chicago_2008.geojson
 	cat $< | python scripts/parse_precinct.py > $@
 
