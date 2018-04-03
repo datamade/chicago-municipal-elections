@@ -3,10 +3,13 @@
 .PHONY : all
 all : data/municipal_general_2015.geojson				\
  data/municipal_general_2011.geojson					\
+ data/municipal_general_2007.geojson					\
  data/municipal_runoff_2015.geojson					\
- data/municipal_runoff_2011.geojson data/municipal_general_2015.csv	\
- data/municipal_general_2011.csv data/municipal_runoff_2015.csv		\
- data/municipal_runoff_2011.csv
+ data/municipal_runoff_2011.geojson					\
+ data/municipal_runoff_2007.geojson data/municipal_general_2015.csv	\
+ data/municipal_general_2011.csv data/municipal_general_2007.csv	\
+ data/municipal_runoff_2015.csv data/municipal_runoff_2011.csv		\
+ data/municipal_runoff_2007.csv
 
 WardPrecincts.zip :
 	wget -O $@ "https://data.cityofchicago.org/download/sgsc-bb4n/application%2Fzip"
@@ -25,6 +28,8 @@ PRECINCTS_07232004.zip :
 
 PRECINCTS_pre2006.zip:
 	wget -O $@ "https://illinoiselectiondata.com/downloads/Chicago_Precincts_2004.zip"
+
+
 
 %.shp : %.zip
 	unzip $<
@@ -55,13 +60,11 @@ precincts/2010_precincts.geojson : Precincts2010.shp
 
 # For the municipal election WardPrecincts.zip did not include feature
 # for ward 27, precinct 46 which appears in that election. The 2010 file does
-# have that precinct
-precincts/2011_precincts.geojson : precincts/2010_precincts.geojson
-	cp $< $@
+# have that precinct. The 2010 precincts aren't fully accurate for ward 19
+# so I manually edit those
 
 precincts/2015_precincts.geojson : PRECINCTS_2012.shp
 	ogr2ogr -f GeoJSON -t_srs crs:84 $@ $<
-
 
 data/municipal_general_%.geojson : precincts/%_precincts.geojson
 	python scripts/boe.py $< --year=$* --type=general > $@
