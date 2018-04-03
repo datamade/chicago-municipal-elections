@@ -24,7 +24,8 @@ precinct_features = {}
 for feature in precincts['features']:
     properties = feature['properties']
     precinct = (properties['WARD'], properties['PRECINCT'])
-    precinct_features[precinct] = properties
+    precinct_features[precinct] = {'WARD': properties['WARD'],
+                                   'PRECINCT': properties['PRECINCT']}
 
 cache = FileCache('_cache')
 

@@ -73,4 +73,4 @@ data/municipal_runoff_%.geojson : precincts/%_precincts.geojson
 	python scripts/boe.py $< --year=$* --type=runoff > $@
 
 %.csv : %.geojson
-	ogr2ogr -f CSV $@ $<
+	cat $< | python scripts/json_to_csv.py | csvsort > $@
