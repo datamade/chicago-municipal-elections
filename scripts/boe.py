@@ -60,6 +60,9 @@ for precinct, votes in election_results.items():
     precinct_features[precinct].update(votes)
     precinct_features[precinct].update({cand: None for cand in other_candidates})
 
+for precinct in precinct_features:
+    assert election_results[precinct]
+    
 with sys.stdout as f:
     json.dump(precincts, f)
 
