@@ -23,9 +23,11 @@ precincts = json.load(args.geojson)
 precinct_features = {}
 for feature in precincts['features']:
     properties = feature['properties']
+    for k in list(properties.keys()):
+        if k not in ("WARD", "PRECINCT"):
+            del properties[k]
     precinct = (properties['WARD'], properties['PRECINCT'])
-    precinct_features[precinct] = {'WARD': properties['WARD'],
-                                   'PRECINCT': properties['PRECINCT']}
+    precinct_features[precinct] = properties
 
 cache = FileCache('_cache')
 
@@ -55,15 +57,21 @@ for name, race in muni_election.races.items():
             election_results[precinct].update(votes)
         else:
             election_results[precinct] = votes
+        all_candidates.update(votes.keys())
 
 for precinct, votes in election_results.items():
     other_candidates = all_candidates - votes.keys()
     precinct_features[precinct].update(votes)
     precinct_features[precinct].update({cand: None for cand in other_candidates})
+    
 
 if args.type == 'general':
     for precinct in precinct_features:
         assert election_results[precinct]
+else:
+    for precinct in precinct_features:
+        if precinct not in election_results:
+            precinct_features[precinct].update({cand: None for cand in all_candidates})
     
 with sys.stdout as f:
     json.dump(precincts, f)

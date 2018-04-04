@@ -1,2 +1,3 @@
 https://github.com/datamade/python-chicago-elections/zipball/master
 scrapelib
+csvkit<1.0

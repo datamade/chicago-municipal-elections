@@ -12,7 +12,7 @@ field_names.remove('PRECINCT')
 
 field_names = ['WARD', 'PRECINCT'] + field_names
 
-writer = csv.DictWriter(sys.stdout, fieldnames=field_names, extrasaction='ignore')
+writer = csv.DictWriter(sys.stdout, fieldnames=field_names, dialect='unix')
 writer.writeheader()
 for feature in features:
     writer.writerow(feature['properties'])
