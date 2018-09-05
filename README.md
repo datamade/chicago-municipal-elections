@@ -29,3 +29,4 @@ Collection of precinct maps and election results for Chicago elections.
 - [Chicago Democracy Project, 1975-1999](http://chicagodemocracy.org/ChooseElection.jsp)
 - [Illinois Election Data, 2011-2015](https://illinoiselectiondata.com/maps/chicagomaps.php)
 - [Emanuel’s electoral coalition bears little resemblance to Daley’s, 2007-2015](https://danielkayhertz.com/2017/04/13/emanuels-electoral-coalition-bears-little-resemblance-to-daleys)
+- [Chicago Democracy Project, 2000-2017](http://cdp.northwestern.edu/database/)
