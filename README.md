@@ -1,7 +1,6 @@
-# chicago-municipal-elections
-Chicago Municipal Elections
+# Chicago Municipal Elections
 
-Collection of precinct maps and election results for Chicago elections.
+This is a repository of elections results and precinct geographies for Chicago municipal elections. You can get all the files here by downloading [this zip file](git@github.com:datamade/chicago-municipal-elections.git).
 
 ## Electronic maps
 
