@@ -4,7 +4,7 @@ This is a repository of elections results and precinct geographies for Chicago m
 
 ## Election results
 
-The elections results are in the `/data` directory. They come in two formats--spreadsheets and geojson files. 
+The elections results are in the `/data` directory. They come in two formats: spreadsheets and geojson files. 
 
 The spreadsheets have a `.csv` file extension. You should be able to open these files in Excel or other spreadsheet program. Each rows contains the ballots and votes cast in an election in an election precinct.
 
