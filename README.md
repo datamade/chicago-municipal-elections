@@ -1,4 +1,4 @@
-# Chicago Municipal Elections
+# Chicago Municipal Elections, 2007-2019
 
 This is a repository of elections results and precinct geographies for Chicago municipal elections. You can get all the files here by downloading [this zip file](https://github.com/datamade/chicago-municipal-elections/archive/master.zip).
 
