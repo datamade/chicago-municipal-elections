@@ -13,6 +13,7 @@ for ward_num in ward_nums:
         ward_dir = join(ARCHIVE_DIR, "WD 1-25", "Ward {:>02}".format(ward_num))
     else:
         ward_dir = join(ARCHIVE_DIR, "WD 26-50", "Ward {:>02}".format(ward_num))
+
     dir_items = os.listdir(ward_dir)
     # Check for Redist directory, use if available
     redist_dirs = sorted([item for item in dir_items if "Redist" in item])
@@ -31,6 +32,7 @@ for ward_num in ward_nums:
     redist_files = [item for item in dir_items if re.match(r".*[\d]{4}\.shp$", item)]
     if len(redist_files) == 1:
         precinct_files.append(join(ward_dir, redist_files[0]))
+        continue
 
     # If the previous patterns aren't met, use the remaining shapefile
     precinct_shp = [item for item in dir_items if item.endswith(".shp")][0]
