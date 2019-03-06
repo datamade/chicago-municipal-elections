@@ -67,8 +67,14 @@ precincts/2010_precincts.geojson : Precincts2010.shp
 precincts/2015_precincts.geojson : PRECINCTS_2012.shp
 	ogr2ogr -f GeoJSON -t_srs crs:84 $@ $<
 
-precincts/2019_precincts.geojson : precincts/2015_precincts.geojson
-	cp $< $@
+# Combine most recent files from the two zip archives for 2019 precincts
+precincts/2019_precincts.geojson : archive/WD_1-25.zip archive/WD_26-50.zip
+	for f in $^; do unzip -d archive $$f; done
+	python scripts/list_2019_precinct_files.py | \
+	xargs -J % mapshaper -i % combine-files \
+	-each "WARD = +ID.slice(0, 2); PRECINCT = +ID.slice(2)" \
+	-filter-fields WARD,PRECINCT \
+	-merge-layers -o $@
 
 data/municipal_general_%.geojson : precincts/%_precincts.geojson
 	python scripts/boe.py $< --year=$* --type=general > $@
