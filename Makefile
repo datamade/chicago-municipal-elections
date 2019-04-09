@@ -71,9 +71,11 @@ precincts/2015_precincts.geojson : PRECINCTS_2012.shp
 
 WD\ 1-25 : archive/WD\ 1-25.zip
 	unzip "$<"
+	touch $@
 
 WD\ 26-50 : archive/WD\ 26-50.zip
 	unzip "$<"
+	touch $@
 
 # Combine most recent files from the two zip archives for 2019 precincts
 precincts/2019_precincts.geojson : WD\ 1-25 WD\ 26-50
