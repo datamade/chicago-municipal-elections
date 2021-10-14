@@ -10,5 +10,5 @@ The spreadsheets have a `.csv` file extension. You should be able to open these 
 
 The geojson files have a `.geojson` file extension. You can open these files in GIS software like [QGIS](https://qgis.org/en/site/). It has all the ballot and vote data for ever precinct but also the geographic data about the precinct. These files are good for making maps.
 
-# Attributions
+## Attributions
 The 1983 data is from the [Chicago Elections Project](http://www.chicagoelectionsproject.com) and is licensed [CC BY 3.0 US](https://creativecommons.org/licenses/by/3.0/us/).
