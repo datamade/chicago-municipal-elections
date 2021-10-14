@@ -8,11 +8,15 @@ all : data/municipal_general_2019.geojson				\
  data/municipal_runoff_2019.geojson					\
  data/municipal_runoff_2015.geojson					\
  data/municipal_runoff_2011.geojson					\
- data/municipal_runoff_2007.geojson data/municipal_general_2019.csv	\
+ data/municipal_runoff_2007.geojson                 \
+ data/municipal_primary_1983.geojson                \
+ data/municipal_general_1983.geojson                \
+ data/municipal_general_2019.csv	                \
  data/municipal_general_2015.csv data/municipal_general_2011.csv	\
  data/municipal_general_2007.csv data/municipal_runoff_2019.csv		\
  data/municipal_runoff_2015.csv data/municipal_runoff_2011.csv		\
- data/municipal_runoff_2007.csv
+ data/municipal_runoff_2007.csv data/municipal_primary_1983.csv     \
+ data/municipal_general_1983.csv
 
 WardPrecincts.zip :
 	wget -O $@ "https://data.cityofchicago.org/download/sgsc-bb4n/application%2Fzip"
@@ -84,6 +88,21 @@ precincts/2019_precincts.geojson : WD\ 1-25 WD\ 26-50
 	-each "WARD = +ID.slice(0, 2); PRECINCT = +ID.slice(2)" \
 	-filter-fields WARD,PRECINCT \
 	-merge-layers -o $@
+
+# Clean up data from the Chicago Elections Project on the 1983 election
+precincts/1983_precincts.geojson: archive/1983_WardandPrecinctShapefileMap.shp
+	mapshaper -i $< -proj crs=wgs84 -o $@
+
+data/municipal_primary_1983.csv: archive/1983_MayoralPrimary_ElectionResultsSpreadsheet.xlsx
+	in2csv $< > $@
+
+data/municipal_general_1983.csv: archive/1983_MayoralGeneral_ElectionResultsSpreadsheet.xlsx
+	in2csv $< > $@
+
+data/municipal_%_1983.geojson: precincts/1983_precincts.geojson data/municipal_%_1983.csv
+	mapshaper -i $< \
+	-join $(filter-out $<,$^) field-types=PREC_ID:str keys=Prec_ID,PREC_ID \
+	-o $@
 
 data/municipal_general_%.geojson : precincts/%_precincts.geojson
 	python scripts/boe.py $< --year=$* --type=general > $@
