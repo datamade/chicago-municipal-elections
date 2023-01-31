@@ -89,6 +89,15 @@ precincts/2019_precincts.geojson : WD\ 1-25 WD\ 26-50
 	-filter-fields WARD,PRECINCT \
 	-merge-layers -o $@
 
+.INTERMEDIATE : archive/WardPrecincts_2023.shp
+archive/WardPrecincts_2023.shp: archive/WardPrecincts_2023.zip
+	unzip -DD -d archive $<
+
+precincts/2023_precincts.geojson: archive/WardPrecincts_2023.shp
+	mapshaper -i $< \
+	-rename-fields WARD=FIRST_ward,PRECINCT=FIRST_prec \
+	-o $@
+
 # Clean up data from the Chicago Elections Project on the 1983 election
 precincts/1983_precincts.geojson: archive/1983_WardandPrecinctShapefileMap.shp
 	mapshaper -i $< -proj crs=wgs84 -o $@
