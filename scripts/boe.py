@@ -50,7 +50,7 @@ elections = elections(session)
 election_results = {}
 all_candidates = set()
 for name, race in muni_election.races.items():
-    if "alderman" in name.lower() or "mayor" in name.lower():
+    if "alder" in name.lower() or "mayor" in name.lower():
         for precinct, votes in race.precincts.items():
             if precinct in election_results:
                 election_results[precinct].update(votes)
