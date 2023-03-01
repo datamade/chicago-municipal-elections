@@ -12,11 +12,12 @@ all : data/municipal_general_2023.geojson				\
       data/municipal_runoff_2007.geojson				\
       data/municipal_primary_1983.geojson				\
       data/municipal_general_1983.geojson				\
-      data/municipal_general_2019.csv data/municipal_general_2015.csv	\
-      data/municipal_general_2011.csv data/municipal_general_2007.csv	\
-      data/municipal_runoff_2019.csv data/municipal_runoff_2015.csv	\
-      data/municipal_runoff_2011.csv data/municipal_runoff_2007.csv	\
-      data/municipal_primary_1983.csv data/municipal_general_1983.csv
+      data/municipal_general_2023.csv data/municipal_general_2019.csv	\
+      data/municipal_general_2015.csv data/municipal_general_2011.csv	\
+      data/municipal_general_2007.csv data/municipal_runoff_2019.csv	\
+      data/municipal_runoff_2015.csv data/municipal_runoff_2011.csv	\
+      data/municipal_runoff_2007.csv data/municipal_primary_1983.csv	\
+      data/municipal_general_1983.csv
 
 WardPrecincts.zip :
 	wget -O $@ "https://data.cityofchicago.org/download/sgsc-bb4n/application%2Fzip"
