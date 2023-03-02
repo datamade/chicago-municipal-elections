@@ -33,7 +33,7 @@ for feature in precincts["features"]:
 
 cache = FileCache("_cache")
 
-session = scrapelib.Scraper()
+session = scrapelib.Scraper(retry_attempts=20)
 session.cache_storage = cache
 session.cache_write_only = False
 
