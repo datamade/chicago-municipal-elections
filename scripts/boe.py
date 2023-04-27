@@ -43,7 +43,7 @@ elections = elections(session)
     for name, election in elections.items()
     if (
         "municipal" in name.lower()
-        and ((str(args.year) in name and args.type in name.lower()) or "2023" in name)
+        and (str(args.year) in name and args.type in name.lower())
     )
 ]
 
